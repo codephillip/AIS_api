@@ -18,7 +18,6 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class MetricSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
 
     class Meta:
         model = Metric
