@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from myapp.models import Crop, User, Metric, Feedback
+from myapp.models import Crop, User, Metric, Feedback, Trigger
 
 
 class CropSerializer(serializers.ModelSerializer):
@@ -22,6 +22,13 @@ class MetricSerializer(serializers.ModelSerializer):
     class Meta:
         model = Metric
         fields = ('id', 'water_volume', 'isIrrigating', 'user', 'time_stamp')
+
+
+class TriggerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Trigger
+        fields = ('id', 'water_volume', 'duration', 'user', 'irrigation_time')
 
 
 class FeedbackSerializer(serializers.ModelSerializer):

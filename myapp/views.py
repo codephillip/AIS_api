@@ -1,11 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from myapp.models import Metric, User, Feedback
-from myapp.serializers import MetricSerializer, UserSerializer, FeedbackSerializer
+from myapp.models import Metric, User, Feedback, Trigger
+from myapp.serializers import MetricSerializer, UserSerializer, FeedbackSerializer, TriggerSerializer
 
 
 @api_view(['GET', 'POST'])
@@ -16,6 +15,11 @@ def metrics_route(request):
 @api_view(['GET', 'POST'])
 def feedbacks_route(request):
     return master_route(request, 'feedbacks', Feedback, FeedbackSerializer)
+
+
+@api_view(['GET', 'POST'])
+def trigger_route(request):
+    return master_route(request, 'triggers', Trigger, TriggerSerializer)
 
 
 def master_route(request, tableName, Table, TableSerializer):

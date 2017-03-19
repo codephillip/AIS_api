@@ -32,10 +32,9 @@ class Metric(models.Model):
 
 class Trigger(models.Model):
     water_volume = models.FloatField()
-    duration = models.TimeField()
+    duration = models.CharField(max_length=10)
     user = models.ForeignKey(User)
-    crop = models.ForeignKey(Crop)
-    time_stamp = models.DateTimeField(auto_now_add=True)
+    irrigation_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return str(self.water_volume)
