@@ -25,7 +25,6 @@ class MetricSerializer(serializers.ModelSerializer):
 
 
 class FeedbackSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
 
     class Meta:
         model = Feedback
