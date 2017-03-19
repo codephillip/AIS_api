@@ -6,5 +6,4 @@ from myapp import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/v1/metrics$', views.metrics_route, name='metrics_route'),
-    url(r'^api/v1/metrics/post$', views.save_metric, name='save_metric'),
 ]
