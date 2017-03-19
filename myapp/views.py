@@ -3,8 +3,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from myapp.models import Metric, User, Feedback, Trigger
-from myapp.serializers import MetricSerializer, UserSerializer, FeedbackSerializer, TriggerSerializer
+from myapp.models import Metric, User, Feedback, Trigger, Crop
+from myapp.serializers import MetricSerializer, UserSerializer, FeedbackSerializer, TriggerSerializer, CropSerializer
 
 
 @api_view(['GET', 'POST'])
@@ -18,8 +18,13 @@ def feedbacks_route(request):
 
 
 @api_view(['GET', 'POST'])
-def trigger_route(request):
+def triggers_route(request):
     return master_route(request, 'triggers', Trigger, TriggerSerializer)
+
+
+@api_view(['GET', 'POST'])
+def crops_route(request):
+    return master_route(request, 'crops', Crop, CropSerializer)
 
 
 def master_route(request, tableName, Table, TableSerializer):
