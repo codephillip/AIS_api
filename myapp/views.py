@@ -35,8 +35,14 @@ def users_route(request):
 
 @api_view(['POST', 'PUT'])
 def user_login(request, pk):
+
     if request.method == 'PUT':
-        pass
+        # only updates crop
+        try:
+            User.objects.filter(id=pk).update(crop=request.data['crop'])
+            return Response({"status": "Successfully updated user information"}, status=status.HTTP_201_CREATED)
+        except Exception:
+            return Response({"status": "Failed updated user information"}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'POST':
         error_response = Response({"status": "Failed to login user"}, status=status.HTTP_401_UNAUTHORIZED)
@@ -60,8 +66,6 @@ def master_route(request, tableName, Table, TableSerializer):
         return Response({tableName: TableSerializer(tables, many=True).data})
 
     if request.method == 'POST':
-        print("posting#")
-        print(request.data)
         serializer = TableSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
