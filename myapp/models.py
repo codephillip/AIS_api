@@ -13,6 +13,7 @@ class Crop(models.Model):
 class User(models.Model):
     name = models.CharField(max_length=400)
     phoneNumber = models.IntegerField()
+    password = models.CharField(max_length=40)
     address = models.CharField(max_length=250)
     crop = models.ForeignKey(Crop)
 

@@ -9,4 +9,6 @@ urlpatterns = [
     url(r'^api/v1/feedbacks$', views.feedbacks_route, name='feedbacks_route'),
     url(r'^api/v1/triggers$', views.triggers_route, name='triggers_route'),
     url(r'^api/v1/crops$', views.crops_route, name='crops_route'),
+    url(r'^api/v1/users$', views.users_route, name='users_route'),
+    url(r'^api/v1/users/(?P<pk>[-\w]+)$', views.user_login, name='user_login'),
 ]

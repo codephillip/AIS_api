@@ -10,11 +10,10 @@ class CropSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    crop = CropSerializer()
 
     class Meta:
         model = User
-        fields = ('id', 'name', 'phoneNumber', 'address', 'crop')
+        fields = ('id', 'name', 'phoneNumber', 'password', 'address', 'crop')
 
 
 class MetricSerializer(serializers.ModelSerializer):

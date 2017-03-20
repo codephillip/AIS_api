@@ -27,6 +27,29 @@ def crops_route(request):
     return master_route(request, 'crops', Crop, CropSerializer)
 
 
+@api_view(['GET', 'POST'])
+def users_route(request):
+    # handles user sign-up and get all users
+    return master_route(request, 'users', User, UserSerializer)
+
+
+@api_view(['POST', 'PUT'])
+def user_login(request, pk):
+    if request.method == 'PUT':
+        pass
+
+    if request.method == 'POST':
+        error_response = Response({"status": "Failed to login user"}, status=status.HTTP_401_UNAUTHORIZED)
+        try:
+            users = User.objects.filter(id=pk, phoneNumber=request.data['phoneNumber'])
+            if users is not None and users[0].password == request.data['password']:
+                return Response({"status": "Successfully logged in user"}, status=status.HTTP_202_ACCEPTED)
+            else:
+                return error_response
+        except Exception:
+            return error_response
+
+
 def master_route(request, tableName, Table, TableSerializer):
     try:
         tables = Table.objects.all()
