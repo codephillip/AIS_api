@@ -27,15 +27,24 @@ def crops_route(request):
     return master_route(request, 'crops', Crop, CropSerializer)
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'PUT'])
 def users_route(request):
+    if request.method == 'PUT':
+        error_response = Response({"status": "Failed to login user"}, status=status.HTTP_401_UNAUTHORIZED)
+        try:
+            users = User.objects.filter(phoneNumber=request.data['phoneNumber'])
+            if users is not None and users[0].password == request.data['password']:
+                return Response({"users": UserSerializer(users, many=True).data}, status=status.HTTP_202_ACCEPTED)
+            else:
+                return error_response
+        except Exception:
+            return error_response
     # handles user sign-up and get all users
     return master_route(request, 'users', User, UserSerializer)
 
 
-@api_view(['POST', 'PUT'])
-def user_login(request, pk):
-
+@api_view(['PUT'])
+def user_update(request, pk):
     if request.method == 'PUT':
         # only updates crop
         try:
@@ -43,17 +52,6 @@ def user_login(request, pk):
             return Response({"status": "Successfully updated user information"}, status=status.HTTP_201_CREATED)
         except Exception:
             return Response({"status": "Failed updated user information"}, status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == 'POST':
-        error_response = Response({"status": "Failed to login user"}, status=status.HTTP_401_UNAUTHORIZED)
-        try:
-            users = User.objects.filter(id=pk, phoneNumber=request.data['phoneNumber'])
-            if users is not None and users[0].password == request.data['password']:
-                return Response({"status": "Successfully logged in user"}, status=status.HTTP_202_ACCEPTED)
-            else:
-                return error_response
-        except Exception:
-            return error_response
 
 
 def master_route(request, tableName, Table, TableSerializer):
