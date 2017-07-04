@@ -120,7 +120,7 @@ def get_byte():
 
 
 def initialise():
-    csv_connection = open("/home/codephillip/PycharmProjects/ais_ml_algorithm/src/test.csv", "wb")
+    csv_connection = open("test.csv", "wb")
     f = csv.writer(csv_connection)
     # smv = soil moisture value. comes from the smv sensor on the hardware
     f.writerow(["pk", "dt", "name", "temp", "humidity", "smv", "trigger"])
@@ -145,7 +145,7 @@ def initialise():
         count += 1
     csv_connection.close()
 
-    csv_url = "/home/codephillip/PycharmProjects/ais_ml_algorithm/src/test.csv"
+    csv_url = "test.csv"
     data = pd.read_csv(csv_url, index_col=0)
     feature_cols = ['temp', 'humidity', 'smv']
 
@@ -183,7 +183,7 @@ def initialise():
     classifier_model4 = classifier4(X_train, X_test, y_train, y_test)
 
     # rerun the best on the data
-    csv_connection = open("/home/codephillip/PycharmProjects/ais_ml_algorithm/src/test.csv", "wb")
+    csv_connection = open("test.csv", "wb")
     f = csv.writer(csv_connection)
     # smv = soil moisture value. comes from the smv sensor on the hardware
     f.writerow(["pk", "dt", "name", "temp", "humidity", "smv", "trigger"])
@@ -211,7 +211,7 @@ def initialise():
 
     # csv_url = "http://127.0.0.1:8080/weather.csv"
     # todo point to a global source for the csv file
-    csv_url = "/home/codephillip/PycharmProjects/ais_ml_algorithm/src/test.csv"
+    csv_url = "test.csv"
     data = pd.read_csv(csv_url, index_col=0)
     feature_cols = ['temp', 'humidity', 'smv']
 
@@ -242,7 +242,7 @@ def initialise():
         print(y)
 
     # save the triggers
-    csv_connection = open("/home/codephillip/PycharmProjects/ais_ml_algorithm/src/test.csv", "wb")
+    csv_connection = open("test.csv", "wb")
     f = csv.writer(csv_connection)
     print("saving data...")
     count = 1
