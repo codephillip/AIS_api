@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from myapp.models import Metric, User, Feedback, Trigger, Crop
 from myapp.serializers import MetricSerializer, UserSerializer, FeedbackSerializer, TriggerSerializer, CropSerializer
 
-import urllib2
+import urllib.request
 import uuid
 import csv
 import json
@@ -132,7 +132,7 @@ def initialise():
     url = "http://127.0.0.1:8080/weather1.json"
     print(url)
     # 'load'-for json document, 'loads'-for json string
-    x = json.load(urllib2.urlopen(url))
+    x = json.load(urllib.request.urlopen(url))
     print(x)
     city = x.get('city')
 
@@ -196,7 +196,7 @@ def initialise():
     # url = "http://127.0.0.1:8080/weather1.json"
     print(url)
     # 'load'-for json document, 'loads'-for json string
-    x = json.load(urllib2.urlopen(url))
+    x = json.load(urllib.request.urlopen(url))
     print(x)
     city = x.get('city')
 
