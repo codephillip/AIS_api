@@ -1,0 +1,8 @@
+{
+  "name": "ais api",
+  "description": "Api for the ais",
+  "image": "heroku/python",
+  "repository": "https://github.com/codephillip/AIS_api",
+  "keywords": ["python", "django" ],
+  "addons": [ "heroku-postgresql" ]
+}
