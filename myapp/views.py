@@ -148,19 +148,19 @@ def initialise():
 
     # choose best model and predict
     if final_classifier == 1:
-        y = classifier_model1.predict(X)
+        y = classifier1.predict(X)
         print("FINAL PREDICTION: model1")
         print(y)
     elif final_classifier == 2:
-        y = classifier_model2.predict(X)
+        y = classifier2.predict(X)
         print("FINAL PREDICTION: model2")
         print(y)
     elif final_classifier == 3:
-        y = classifier_model3.predict(X)
+        y = classifier3.predict(X)
         print("FINAL PREDICTION: model3")
         print(y)
     elif final_classifier == 4:
-        y = classifier_model4.predict(X)
+        y = classifier4.predict(X)
         print("FINAL PREDICTION: model4")
         print(y)
 
