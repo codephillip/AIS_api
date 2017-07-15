@@ -27,7 +27,7 @@ class TriggerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Trigger
-        fields = ('id', 'water_volume', 'duration', 'user', 'irrigation_time')
+        fields = ('id', 'water_volume', 'duration', 'start', 'user', 'irrigation_time')
 
 
 class FeedbackSerializer(serializers.ModelSerializer):

@@ -34,6 +34,7 @@ class Metric(models.Model):
 class Trigger(models.Model):
     water_volume = models.FloatField()
     duration = models.CharField(max_length=10)
+    start = models.BooleanField(default=False)
     user = models.ForeignKey(User)
     irrigation_time = models.DateTimeField(auto_now_add=True)
 
