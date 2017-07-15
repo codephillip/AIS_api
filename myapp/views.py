@@ -128,7 +128,7 @@ def initialise():
     # url = "weather1.json"
     print(url)
     # 'load'-for json document, 'loads'-for json string
-    x = json.load(urllib2.urlopen(url))
+    x = json.load(urllib.request.urlopen(url))
     print(x)
     city = x.get('city')
 
