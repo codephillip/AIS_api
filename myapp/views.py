@@ -6,11 +6,11 @@ from rest_framework.response import Response
 from myapp.models import Metric, User, Feedback, Trigger, Crop
 from myapp.serializers import MetricSerializer, UserSerializer, FeedbackSerializer, TriggerSerializer, CropSerializer
 
-
 import urllib.request
 import uuid
 import csv
 import json
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 import pandas as pd
 from sklearn import metrics
@@ -121,7 +121,8 @@ def get_byte():
 
 
 def initialise():
-    csv_connection = open("../AIS_api/staticfiles/test.csv", "wb")
+    url = static('test.csv')
+    csv_connection = open(url, "wb")
     f = csv.writer(csv_connection)
     # smv = soil moisture value. comes from the smv sensor on the hardware
     f.writerow(["pk", "dt", "name", "temp", "humidity", "smv", "trigger"])
