@@ -121,99 +121,20 @@ def get_byte():
 
 
 def initialise():
-    url = static('test.csv')
-    csv_connection = open(url, "wb")
-    f = csv.writer(csv_connection)
-    # smv = soil moisture value. comes from the smv sensor on the hardware
-    f.writerow(["pk", "dt", "name", "temp", "humidity", "smv", "trigger"])
-
-    # production url
-    # url = "http://api.openweathermap.org" + "/data/2.5/forecast?id=" + str(
-    #     232422) + "&mode=json&units=metric&cnt=7&appid=1f846e7a0e00cf8c2f96dd5e768580fb"
-    # development url
-    url = "http://127.0.0.1:8080/weather1.json"
-    print(url)
-    # 'load'-for json document, 'loads'-for json string
-    x = json.load(urllib.request.urlopen(url))
-    print(x)
-    city = x.get('city')
-
-    count = 0
-    for list_data in x.get('list'):
-        f.writerow([count + 1, list_data["dt_txt"],
-                    city["name"], list_data["main"]["temp"], list_data["main"]["humidity"],
-                    str(uuid.uuid4().get_node())[0:3],
-                    get_byte()])
-        count += 1
-    csv_connection.close()
-
-    csv_url = "test.csv"
-    data = pd.read_csv(csv_url, index_col=0)
-    feature_cols = ['temp', 'humidity', 'smv']
-
-    print("ACTUAL DATA")
-    print(data)
-
-    X = data[feature_cols]
-    print(X.head())
-    print(type(X))
-    print(X.shape)
-
-    y = data['trigger']
-    print(y.head())
-    print(type(y))
-    print(y.shape)
-
-    # MACHINE LEARNING
-    # split the data into training and testing data
-    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1)
-    # default split is 75% for training and 25% for testing
-    print("train test split shapes")
-    print(X_train.shape)
-    print(y_train.shape)
-    print(X_test.shape)
-    print(y_test.shape)
-
-    # run all classifier to determine the best
-    print("running classifier1")
-    classifier_model1 = classifier1(X_train, X_test, y_train, y_test)
-    print("running classifier2")
-    classifier_model2 = classifier2(X_train, X_test, y_train, y_test)
-    print("running classifier3")
-    classifier_model3 = classifier3(X_train, X_test, y_train, y_test)
-    print("running classifier4")
-    classifier_model4 = classifier4(X_train, X_test, y_train, y_test)
-
-    # rerun the best on the data
-    csv_connection = open("test.csv", "wb")
-    f = csv.writer(csv_connection)
-    # smv = soil moisture value. comes from the smv sensor on the hardware
-    f.writerow(["pk", "dt", "name", "temp", "humidity", "smv", "trigger"])
-
-    # todo capture new data
     # production url
     url = "http://api.openweathermap.org" + "/data/2.5/forecast?id=" + str(
-        232422) + "&mode=json&units=metric&cnt=21&appid=1f846e7a0e00cf8c2f96dd5e768580fb"
+        233114) + "&mode=json&units=metric&cnt=7&appid=1f846e7a0e00cf8c2f96dd5e768580fb"
     # development url
-    # url = "http://127.0.0.1:8080/weather1.json"
+    # url = "weather1.json"
     print(url)
     # 'load'-for json document, 'loads'-for json string
-    x = json.load(urllib.request.urlopen(url))
+    x = json.load(urllib2.urlopen(url))
     print(x)
     city = x.get('city')
 
-    count = 1
-    for list_data in x.get('list'):
-        f.writerow([count, list_data["dt_txt"],
-                    city["name"], list_data["main"]["temp"], list_data["main"]["humidity"],
-                    str(uuid.uuid4().get_node())[0:3],
-                    0])
-        count += 1
-    csv_connection.close()
-
-    # csv_url = "http://127.0.0.1:8080/weather.csv"
+    # csv_url = "http://127.0.0.1:8080/test.csv"
     # todo point to a global source for the csv file
-    csv_url = "test.csv"
+    csv_url = "https://storage.googleapis.com/ais_api/test.csv"
     data = pd.read_csv(csv_url, index_col=0)
     feature_cols = ['temp', 'humidity', 'smv']
 
