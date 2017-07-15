@@ -121,7 +121,7 @@ def get_byte():
 
 
 def initialise():
-    csv_connection = open("test.csv", "wb")
+    csv_connection = open("../AIS_api/staticfiles/test.csv", "wb")
     f = csv.writer(csv_connection)
     # smv = soil moisture value. comes from the smv sensor on the hardware
     f.writerow(["pk", "dt", "name", "temp", "humidity", "smv", "trigger"])
