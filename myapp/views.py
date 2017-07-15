@@ -279,9 +279,13 @@ def feedbacks_route(request):
 
 @api_view(['GET', 'POST', 'PUT'])
 def triggers_route(request):
-    if request.method == 'PUT':
-        pass
-        # initialise()
+    return master_route(request, 'triggers', Trigger, TriggerSerializer)
+
+
+@api_view(['GET', 'POST', 'PUT'])
+def start_learning(request):
+    if request.method == 'GET':
+        initialise()
     return master_route(request, 'triggers', Trigger, TriggerSerializer)
 
 
